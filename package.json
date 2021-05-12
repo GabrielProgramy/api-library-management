@@ -1,0 +1,8 @@
+{
+  "name": "api-library-management",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/GabrielProgramy/api-library-management.git",
+  "author": "Gabriel Costa <gabrielestevan14@gmail.com>",
+  "license": "MIT"
+}
