@@ -11,6 +11,14 @@ class BookController {
 
     return response.json(book);
   }
+
+  async show(request: Request, response: Response) {
+    const bookRepository = new BookRepository();
+
+    const books = await bookRepository.list();
+
+    return response.json(books).status(200);
+  }
 }
 
 export { BookController };

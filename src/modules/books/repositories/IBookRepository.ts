@@ -8,6 +8,7 @@ interface ICreateBookDTO {
 
 interface IBookRepository {
   create({ title, release_year, publishing_id }: ICreateBookDTO): Promise<Book>
+  list(): Promise<Book[]>;
 }
 
 export { IBookRepository, ICreateBookDTO };

@@ -11,9 +11,9 @@ class BookRepository implements IBookRepository {
   }
 
   async create({ title, release_year, publishing_id }: ICreateBookDTO): Promise<Book> {
-    const bookAlreadyExist = await this.bookRepository.findOne(title);
+    const bookAlreadyExist = await this.bookRepository.findOne({ title });
 
-    if (!bookAlreadyExist) {
+    if (bookAlreadyExist) {
       return bookAlreadyExist;
     }
 
@@ -26,6 +26,12 @@ class BookRepository implements IBookRepository {
     await this.bookRepository.save(book);
 
     return book;
+  }
+
+  async list(): Promise<Book[]> {
+    const books = await this.bookRepository.find();
+
+    return books;
   }
 
 }
