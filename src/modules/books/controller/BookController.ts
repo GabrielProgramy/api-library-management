@@ -3,11 +3,11 @@ import { BookRepository } from "../repositories/implementations/BookRepository";
 
 class BookController {
   async create(request: Request, response: Response) {
-    const { title, release_year, publishing_id } = request.body;
+    const { title, release_year, publishing_id, author_id } = request.body;
 
     const bookRepository = new BookRepository();
 
-    const book = await bookRepository.create({ title, release_year, publishing_id });
+    const book = await bookRepository.create({ title, release_year, publishing_id, author_id });
 
     return response.json(book);
   }

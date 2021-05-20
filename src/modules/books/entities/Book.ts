@@ -2,6 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { Publishing } from "./Publishing";
 
 import { v4 as uuid } from 'uuid';
+import { Author } from "./Author";
 
 @Entity('books')
 class Book {
@@ -20,6 +21,13 @@ class Book {
 
   @Column()
   publishing_company_id: string;
+
+  @JoinColumn({ name: 'author_id' })
+  @ManyToOne(() => Author)
+  author: Author;
+
+  @Column()
+  author_id: string;
 
   constructor() {
     if (!this.id) {

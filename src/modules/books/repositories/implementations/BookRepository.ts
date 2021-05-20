@@ -10,7 +10,12 @@ class BookRepository implements IBookRepository {
     this.bookRepository = getRepository(Book);
   }
 
-  async create({ title, release_year, publishing_id }: ICreateBookDTO): Promise<Book> {
+  async create({
+    title,
+    release_year,
+    publishing_id,
+    author_id
+  }: ICreateBookDTO): Promise<Book> {
     const bookAlreadyExist = await this.bookRepository.findOne({ title });
 
     if (bookAlreadyExist) {
@@ -20,7 +25,8 @@ class BookRepository implements IBookRepository {
     const book = this.bookRepository.create({
       title,
       release_year,
-      publishing_company_id: publishing_id
+      publishing_company_id: publishing_id,
+      author_id,
     });
 
     await this.bookRepository.save(book);
@@ -29,7 +35,9 @@ class BookRepository implements IBookRepository {
   }
 
   async list(): Promise<Book[]> {
-    const books = await this.bookRepository.find();
+    const books = await this.bookRepository.find({
+      relations: ['author', 'publishing']
+    });
 
     return books;
   }
